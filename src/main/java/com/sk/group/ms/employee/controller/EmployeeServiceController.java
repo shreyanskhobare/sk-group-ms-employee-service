@@ -31,11 +31,11 @@ public class EmployeeServiceController {
 	private EmployeeDataService employeeDataService;
 
 	@PostMapping(value="/saveEmployeeData")
-	public ResponseEntity<EmployeePersonalInfo> saveEmployeeData(
+	public ResponseEntity<Employee> saveEmployeeData(
 			@RequestBody EmployeeDataRequest employeePersonalInfo) {
 
 		// Add validation logic here
-		EmployeePersonalInfo response = employeeDataService.saveEmployeeCompleteData(employeePersonalInfo);
+		Employee response = employeeDataService.saveEmployeeCompleteData(employeePersonalInfo);
 
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}

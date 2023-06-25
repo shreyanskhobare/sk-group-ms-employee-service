@@ -13,6 +13,7 @@ import com.sk.group.ms.employee.request.EmployeeDataRequest;
 import com.sk.group.ms.employee.service.EmployeeDataService;
 import com.sk.group.shared.entity.Employee;
 import com.sk.group.shared.entity.EmployeePersonalInfo;
+import com.sk.group.shared.entity.OrganizationData;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,21 +38,25 @@ public class EmployeeDataServiceImpl implements EmployeeDataService {
 	 * @return
 	 */
 	@Override
-	public EmployeePersonalInfo saveEmployeeCompleteData(EmployeeDataRequest employeeDataRequest) {
+	public Employee saveEmployeeCompleteData(EmployeeDataRequest employeeDataRequest) {
+
+		OrganizationData organization = OrganizationData.builder()
+				.organizationId(employeeDataRequest.getOrganizationId()).build();
 
 		Employee employee = Employee.builder().employmentActive(employeeDataRequest.isEmploymentActive())
-				.firstName(employeeDataRequest.getFirstName()).lastName(employeeDataRequest.getLastName())
+				.organizationId(organization).firstName(employeeDataRequest.getFirstName())
+				.lastName(employeeDataRequest.getLastName())
 				.organizationEmail(employeeDataRequest.getOrganizationEmail()).title(employeeDataRequest.getTitle())
 				.build();
 		employee = employeeRepository.save(employee);
 
-		EmployeePersonalInfo personalInfo = EmployeePersonalInfo.builder().employeeId(employee.getEmployeeId())
+		EmployeePersonalInfo personalInfo = EmployeePersonalInfo.builder().employeeId(employee)
 				.address(employeeDataRequest.getAddress()).joiningDate(employeeDataRequest.getJoiningDate())
 				.leavingDate(employeeDataRequest.getLeavingDate()).mobileNumber(employeeDataRequest.getMobileNumber())
 				.personalEmail(employeeDataRequest.getPersonalEmail()).build();
 		personalInfo = employeePersonalInfoRepository.save(personalInfo);
 
-		return personalInfo;
+		return employee;
 	}
 
 	/**

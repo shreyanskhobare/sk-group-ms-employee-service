@@ -25,5 +25,6 @@ public class EmployeeDataRequest {
 	private String address;
 	private Date joiningDate;
 	private Date leavingDate;
+	private long organizationId;
 	
 }
