@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com</groupId>
 	<artifactId>sk-group-ms-employee-service</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 	<name>sk-group-ms-employee-service</name>
 	<description>Employee Data MS</description>
 	<properties>
@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>com</groupId>
 			<artifactId>sk-group-shared-entity</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 		
 	</dependencies>

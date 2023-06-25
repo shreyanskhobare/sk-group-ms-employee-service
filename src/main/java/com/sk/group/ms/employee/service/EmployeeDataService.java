@@ -17,7 +17,7 @@ public interface EmployeeDataService {
 	 * In this method, we are persisting values in both EMPLOYEE and EMPLOYEE_PERSONAL_INFO table
 	 * @param employeeDataRequest
 	 */
-	public EmployeePersonalInfo saveEmployeeCompleteData(EmployeeDataRequest employeeDataRequest);
+	public Employee saveEmployeeCompleteData(EmployeeDataRequest employeeDataRequest);
 	
 	/**
 	 * 
