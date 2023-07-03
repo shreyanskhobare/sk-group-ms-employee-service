@@ -25,7 +25,7 @@
 			<url>file://${project.basedir}/lib</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -70,14 +70,19 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		
-		<!-- Has to be manually added since our shared jars are not on central Repo -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<!-- Has to be manually added since our shared jars are not on central
+		Repo -->
 		<dependency>
 			<groupId>com</groupId>
 			<artifactId>sk-group-shared-entity</artifactId>
 			<version>1.1</version>
 		</dependency>
-		
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
