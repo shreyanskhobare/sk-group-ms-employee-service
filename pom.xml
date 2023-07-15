@@ -74,13 +74,21 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
 		<!-- Has to be manually added since our shared jars are not on central
 		Repo -->
 		<dependency>
 			<groupId>com</groupId>
 			<artifactId>sk-group-shared-entity</artifactId>
 			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com</groupId>
+			<artifactId>sk-group-shared-implementation</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 	</dependencies>
