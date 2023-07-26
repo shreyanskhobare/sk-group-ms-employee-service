@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sk.group.ms.employee.request.EmployeeDataRequest;
 import com.sk.group.ms.employee.service.EmployeeDataService;
-import com.sk.group.shared.entity.Employee;
-import com.sk.group.shared.entity.EmployeePersonalInfo;
+import com.sk.group.shared.implementation.exception.GroupException;
+import com.sk.group.shared.implementation.response.employee.GetEmployeePersonalInfoResponse;
+import com.sk.group.shared.implementation.response.employee.GetEmployeeResponse;
+import com.sk.group.shared.implementation.response.employee.SaveEmployeeResponse;
 
 /**
  * @author - Shreyans Khobare
@@ -30,28 +32,28 @@ public class EmployeeServiceController {
 	@Autowired
 	private EmployeeDataService employeeDataService;
 
-	@PostMapping(value="/saveEmployeeData")
-	public ResponseEntity<Employee> saveEmployeeData(
+	@PostMapping(value="/saveEmployee")
+	public ResponseEntity<SaveEmployeeResponse> saveEmployeeData(
 			@RequestBody EmployeeDataRequest employeePersonalInfo) {
 
 		// Add validation logic here
-		Employee response = employeeDataService.saveEmployeeCompleteData(employeePersonalInfo);
+		SaveEmployeeResponse response = employeeDataService.saveEmployeeCompleteData(employeePersonalInfo);
 
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
 
 	@GetMapping(value="/getEmployeePersonalInfo/{employeeId}")
-	public ResponseEntity<EmployeePersonalInfo> getEmployeePersonalInfo(@PathVariable("employeeId") String employeeId) {
+	public ResponseEntity<GetEmployeePersonalInfoResponse> getEmployeePersonalInfo(@PathVariable("employeeId") String employeeId) throws GroupException {
 
-		EmployeePersonalInfo employeePersonalInfo = employeeDataService.getEmployeePersonalInfo(Long.parseLong(employeeId));
+		GetEmployeePersonalInfoResponse employeePersonalInfo = employeeDataService.getEmployeePersonalInfo(Long.parseLong(employeeId));
 		return ResponseEntity.ok(employeePersonalInfo);
 
 	}
 
 	@GetMapping(value="/getEmployee")
-	public ResponseEntity<Employee> getEmployee(@RequestParam("employeeId") String employeeId) {
+	public ResponseEntity<GetEmployeeResponse> getEmployee(@RequestParam("employeeId") String employeeId) throws GroupException {
 
-		Employee employee = employeeDataService.getEmployee(Long.parseLong(employeeId));
+		GetEmployeeResponse employee = employeeDataService.getEmployee(Long.parseLong(employeeId));
 		return ResponseEntity.ok(employee);
 
 	}
