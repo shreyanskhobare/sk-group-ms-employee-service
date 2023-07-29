@@ -88,17 +88,20 @@ public class EmployeeDataServiceImpl implements EmployeeDataService {
 	 */
 	public GetEmployeePersonalInfoResponse getEmployeePersonalInfo(Long employeeId) throws GroupException {
 
-		GetEmployeePersonalInfoResponse response = new GetEmployeePersonalInfoResponse();
-
-		EmployeePersonalInfo employeeInfo = employeePersonalInfoRepository.findById(employeeId).get();
-		if (null == employeeInfo) {
-
-			LOGGER.error("Did not find any entry in EMPLOYEE_PERSONAL_INFO table for employeeId: " + employeeId);
+		EmployeePersonalInfo employeeInfo = null;
+		try {
+			
+			employeeInfo = employeePersonalInfoRepository.findById(employeeId).get();
+			
+		} catch (Exception e) {
+			// NO ROWS Returned will also be thrown as an exception
+			LOGGER.error("Exception occured while trying to find any entry in EMPLOYEE_PERSONAL_INFO table for employeeId: " + employeeId, e);
 			throw new GroupException(HttpStatus.NOT_FOUND, GroupErrorCodes.EMPLOYEE_PERSONAL_INFO_NOT_FOUND,
 					messageEmployeePersonalInfoNotFound + employeeId);
-
+			
 		}
 
+		GetEmployeePersonalInfoResponse response = new GetEmployeePersonalInfoResponse();
 		response.setAddress(employeeInfo.getAddress());
 		response.setEmployeeId(employeeInfo.getEmployeeId().getEmployeeId());
 		response.setId(employeeInfo.getId());
@@ -118,16 +121,20 @@ public class EmployeeDataServiceImpl implements EmployeeDataService {
 	 */
 	public GetEmployeeResponse getEmployee(Long employeeId) throws GroupException {
 
-		GetEmployeeResponse response = new GetEmployeeResponse();
-		Employee employee = employeeRepository.findById(employeeId).get();
-		if (null == employee) {
-
-			LOGGER.error("Did not find any entry in EMPLOYEE table for employeeId: " + employeeId);
+		Employee employee = null;
+		try {
+			
+			employee = employeeRepository.findById(employeeId).get();
+			
+		} catch (Exception e) {
+			// NO ROWS Returned will also be thrown as an exception
+			LOGGER.error("Exception occured while trying to find any entry in EMPLOYEE table for employeeId: " + employeeId, e);
 			throw new GroupException(HttpStatus.NOT_FOUND, GroupErrorCodes.EMPLOYEE_NOT_FOUND,
 					messageEmployeeNotFound + employeeId);
-
+			
 		}
 
+		GetEmployeeResponse response = new GetEmployeeResponse();
 		response.setEmployeeId(employeeId);
 		response.setEmployeePersonalInfoId(employee.getEmployeePersonalInfo().getId());
 		response.setEmploymentActive(employee.isEmploymentActive());
